@@ -1,0 +1,26 @@
+{
+  "name": "ip-report-listener",
+  "version": "1.0.0",
+  "description": "Listens to IP Reports and device statistics published via MQTT",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BioBoost/ip-report-listener.git"
+  },
+  "keywords": [
+    "report",
+    "ip",
+    "listener",
+    "dhcp"
+  ],
+  "author": "Nico De Witte",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BioBoost/ip-report-listener/issues"
+  },
+  "homepage": "https://github.com/BioBoost/ip-report-listener#readme"
+}
