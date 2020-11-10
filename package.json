@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/BioBoost/ip-report-listener/issues"
   },
-  "homepage": "https://github.com/BioBoost/ip-report-listener#readme"
+  "homepage": "https://github.com/BioBoost/ip-report-listener#readme",
+  "dependencies": {
+    "mqtt": "^4.2.4"
+  }
 }
