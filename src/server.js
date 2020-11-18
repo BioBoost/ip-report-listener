@@ -1,23 +1,27 @@
 const mqtt = require('mqtt');
 const axios = require('axios');
+const config = require('./config/config.js')
 
 console.log("Starting IP report listener");
 
-let client  = mqtt.connect('mqtt://10.0.0.200');     // ENV VAR !!!!
+let client  = mqtt.connect(`mqtt://${config.mqtt.broker}`);
 
+const backend = `${config.general.protocol}://${config.general.domain}:${config.general.port}`;
 const api = axios.create({
-  baseURL: 'http://localhost:8081',         // ENV !!!!
+  baseURL: backend,
 });
  
 client.on('connect', function () {
-  client.subscribe('test/dhcp/detect', function (err) {   // ENV VAR !!!
+  client.subscribe(config.mqtt.topic, function (err) {
     if (err) console.log("Failed to subscribe");
   })
 })
  
 client.on('message', function (topic, message) {
-  if (topic === 'test/dhcp/detect') {
+  if (topic === config.mqtt.topic) {
     let data = JSON.parse(message.toString());
+    // TODO - VALIDATE DATA
+    console.log(`Posting to ${backend}`)
     console.log(data);
 
     // {
@@ -26,17 +30,10 @@ client.on('message', function (topic, message) {
     //   "ip": "10.0.0.2",
     //   "hostname": "unknown"
     // }
-    
 
-
-    // POST HERE TO BACKEND
-    // axios.post('/devices', {
-      
-    // })
+    api.post('/ipreports', data);
   }
 });
-
-
 
 // CLEAN SHUTDOWN?
 // client.end()
