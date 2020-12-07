@@ -17,3 +17,13 @@ Running the image as a container:
 ```bash
 docker run -it -e MQTT_BROKER=mybroker -e MQTT_TOPIC="my/cool/topic" --rm ip-report-listener
 ```
+
+**Available environment variables:**
+
+| Variable | Default | Description |
+| --- | --- |
+| BACKEND_PORT | `8081` | TODO |
+| BACKEND_DOMAIN | `localhost` | TODO |
+| BACKEND_PROTOCOL | `http` | TODO |
+| MQTT_BROKER | `labict.be` | TODO |
+| MQTT_TOPIC | `test/network/dhcp/reports` | TODO |
