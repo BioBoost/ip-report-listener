@@ -7,6 +7,7 @@ console.log("Starting IP report listener");
 let client  = mqtt.connect(`mqtt://${config.mqtt.broker}`);
 
 const backend = `${config.general.protocol}://${config.general.domain}:${config.general.port}`;
+console.log(`Posting data to ${backend}`);
 const api = axios.create({
   baseURL: backend,
 });
@@ -31,7 +32,15 @@ client.on('message', function (topic, message) {
     //   "hostname": "unknown"
     // }
 
-    api.post('/ipreports', data);
+    api.post('/ipreports', data)
+    .then((response) => {
+      console.log("Posted successfully");
+      console.log(`Status: ${response.status}`);
+    })
+    .catch((error) => {
+      console.log("Failed to post data to backend");
+      console.log(error);
+    });
   }
 });
 
